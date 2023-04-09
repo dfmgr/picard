@@ -147,6 +147,9 @@ fi
 run_postinst() {
   dfmgr_run_post
   [ -d "$HOME/.config/MusicBrainz" ] || mkdir -p "$HOME/.config/MusicBrainz"
+  if [ -f "$HOME/.config/MusicBrainz/Picard.ini" ] && [ ! -L "$HOME/.config/MusicBrainz/Picard.ini" ]; then
+    cp -Rf "$HOME/.config/MusicBrainz/Picard.ini" "$HOME/.config/MusicBrainz/Picard.$$.ini"
+  fi
   ln -sf "$APPDIR/Picard.ini" "$HOME/.config/MusicBrainz/Picard.ini"
   replace "$APPDIR/Picard.ini" "replacehome" "$HOME"
 }
