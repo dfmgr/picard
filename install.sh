@@ -146,6 +146,8 @@ fi
 # run post install scripts
 run_postinst() {
   dfmgr_run_post
+  [ -d "$HOME/.config/MusicBrainz" ] || mkdir -p "$HOME/.config/MusicBrainz"
+  ln -sf "$APPDIR/Picard.ini" "$HOME/.config/MusicBrainz/Picard.ini"
   replace "$APPDIR/Picard.ini" "replacehome" "$HOME"
 }
 #
