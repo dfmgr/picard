@@ -175,6 +175,9 @@ RUBY_GEMS=""
 PYTHON_PIP=""
 PHP_COMPOSER=""
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# Run custom actions
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Show a custom message after install
 __run_post_message() {
   true
@@ -199,7 +202,7 @@ __run_post_install() {
   local getRunStatus=0
   [ -d "$HOME/.config/MusicBrainz" ] || __mkdir "$HOME/.config/MusicBrainz"
   if [ -f "$HOME/.config/MusicBrainz/Picard.ini" ] && [ ! -L "$HOME/.config/MusicBrainz/Picard.ini" ]; then
-    __cp_rf "$HOME/.config/MusicBrainz/Picard.ini" "$HOME/.config/MusicBrainz/Picard.$$.ini"
+    __mv_f "$HOME/.config/MusicBrainz/Picard.ini" "$HOME/.config/MusicBrainz/Picard.ini.bak"
   fi
   __symlink "$APPDIR/Picard.ini" "$HOME/.config/MusicBrainz/Picard.ini"
   __replace_one "replacehome" "$HOME" "$APPDIR/Picard.ini"
